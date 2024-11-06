@@ -40,12 +40,12 @@ server.on("upgrade", (request, socket, head) => {
 app.post("/webhook", (req, res) => {
   const payload = req.body;
   console.log("Received webhook:", payload);
-    if (!payload.type || !payload.data || !payload.data.accountId) {
+    if (!payload.event || !payload.data || !payload.data.accountId) {
       res.status(200).send("Webhook received");
 
       return;
     }
-    const type = payload.type;
+    const type = payload.event;
     if (type !== "envelope-completed") {
       res.status(200).send("Webhook received");
 
