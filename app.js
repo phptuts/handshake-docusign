@@ -22,9 +22,6 @@ wss.on("connection", (ws) => {
     if (!json.type || json.type !== "register" || !json.account_id) return;
     ws.id = json.account_id;
   });
-
-  // Send a message to the client
-  ws.send(JSON.stringify({ message: "Welcome to the WebSocket server!" }));
 });
 
 // HTTP server to integrate WebSocket upgrade handling
