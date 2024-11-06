@@ -43,13 +43,17 @@ server.on("upgrade", (request, socket, head) => {
 app.post("/webhook", (req, res) => {
   const payload = req.body;
   console.log("Received webhook:", payload);
-  if (!payload.type || !payload.data || !payload.data.accountId) {
-    return;
-  }
-  const type = payload.type;
-  if (type !== "envelope-completed") {
-    return;
-  }
+    if (!payload.type || !payload.data || !payload.data.accountId) {
+      res.status(200).send("Webhook received");
+
+      return;
+    }
+    const type = payload.type;
+    if (type !== "envelope-completed") {
+      res.status(200).send("Webhook received");
+
+      return;
+    }
   const accountId = payload.data.accountId;
 
   // Broadcast the payload to all connected WebSocket clients
